@@ -1,0 +1,42 @@
+header{
+    background-color: #FFFFFF;
+    height: 80px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-btn{
+    font-family: 'Fira Go',Helvetica;
+    width: 93px;
+    height: 40px;
+    border: none;
+    padding: 10px 20px;
+    margin: 20px 76px 20px 0;
+    color: #FFF;
+    border-radius: 8px;
+    
+}
+
+.login-btn:hover{
+    cursor: pointer;
+}
+
+#img1{
+    margin-left: 76px;
+}
+
+.div-blog{
+    display: flex;
+    justify-content: space-between;
+}
+
+#img2{
+    margin: 64px 76px;
+}
+
+#text-blog{
+    font-size: 64px;
+    margin: 128px 0 0 89px;
+}

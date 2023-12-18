@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Fira Go';
+    src: url('../assets/fonts/FiraGO-Bold.otf') format('opentype');
+  }
+  
+body {
+    font-family: 'Fira Go',Helvetica;
+    background-color: #f3f2fa;
+    width: 100vw;
+    height: 100vh;
+}
+
+button{
+    background-color: #5D37F3;
+}
