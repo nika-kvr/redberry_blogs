@@ -9,7 +9,8 @@ header{
 
 .login-btn{
     font-family: 'Fira Go',Helvetica;
-    width: 93px;
+    background-color: #5D37F3;
+    width: auto;
     height: 40px;
     border: none;
     padding: 10px 20px;
@@ -27,7 +28,7 @@ header{
     margin-left: 76px;
 }
 
-.div-blog{
+.div-blog-header{
     display: flex;
     justify-content: space-between;
 }
@@ -39,4 +40,169 @@ header{
 #text-blog{
     font-size: 64px;
     margin: 128px 0 0 89px;
+}
+
+.div-filters{
+    display: flex;
+    flex-wrap: wrap
+}
+
+.categorie-btn{
+    font-family: 'Fira Go',Helvetica;
+    border: none;
+    width: auto;
+    height: 32px;
+    padding: 8px 16px;
+    margin-left: 24px;
+    margin-top: 24px;
+    color: #FFF;
+    border-radius: 30px;
+    white-space: nowrap;
+    display: inline-block;
+
+}
+
+.categorie-btn:hover{
+    cursor: pointer;
+}
+
+
+#modal{
+    border: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    background: #FFF;
+
+}
+
+.div-dialog{
+    width: 480px;
+    height: 272px;
+}
+
+.dialog-text{
+    margin: 4px 194px 0 195px;
+    font-size: 24px;
+}
+
+#dialogClose{
+    width: 24px;
+    height: 24px;
+    margin: 20px 0 0 436px;
+}
+#dialogClose:hover{
+    cursor: pointer;
+}
+
+.dialog-form{
+    margin: 20px 0 0 24px;
+}
+
+#dialogEmailLabel{
+    font-size: 14px;
+}
+
+.dialog-email{
+    border-radius: 12px;
+    border: 1.5px solid #5D37F3;
+    background: #F7F7FF;
+    width: 432px;
+    height: 44px;
+    outline: none;
+    padding: 12px 0 12px 16px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+.dialog-email-error{
+    border-radius: 12px;
+    border: 1px solid #EA1919;
+    background: #FAF2F3;
+    width: 432px;
+    height: 44px;
+    outline: none;
+    padding: 12px 0 12px 16px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+#dialogLoginBtn{
+    font-family: 'Fira Go',Helvetica;
+    display: flex;
+    width: 432px;
+    height: 40px;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: #5D37F3;
+    color: #FFF;
+    border: none;
+    margin-top: 24px;
+
+}
+
+#dialogLoginBtn:hover{
+    cursor: pointer;
+}
+
+.dialog-email-error-msg{
+    display: none;
+    margin-top: 8px;
+}
+.dialog-email-error-msg1{
+    display: flex;
+    align-items: center;
+}
+
+
+.dialog-email-error-msg-txt{
+    color: #EA1919;
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.div-dialog-success{
+    display: none;
+}
+
+#svgSuccess{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#successMsg{
+    margin: 16px 98px 0 98px;
+}
+
+.success-btn{
+    font-family: 'Fira Go',Helvetica;
+    display: flex;
+    width: 432px;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: #5D37F3;
+    border: none;
+    color: #FFF;
+    font-size: 14px;
+    margin-top: 48px;
+}
+
+.success-btn:hover{
+    cursor: pointer;
+}
+
+#addBlogbtn{
+    display: none;
 }
