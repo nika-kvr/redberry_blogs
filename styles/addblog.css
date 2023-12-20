@@ -1,0 +1,63 @@
+body{
+    background: #FBFAFF;
+}
+
+.addblog-header{
+    height: 80px;
+    border-bottom: 1px solid #E4E3EB;
+    background: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.form-header{
+    display: flex;
+    align-items: center;
+    padding: 40px 0 0 76px;
+}
+
+.form-header-text{
+    font-size: 32px;
+    margin-left: 240px;
+}
+
+#backBtn:hover{
+    cursor: pointer;
+}
+
+.div-addBlog{
+    display: flex;
+    flex-direction: column;
+    margin: 40px 0 0 360px;
+}
+
+.image-input-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 180px;
+    margin-top: 20px;
+    border-radius: 12px;
+    border: 1px dashed #85858D;
+    background: #F4F3FF;
+}
+
+.img-input-text{
+    display: flex;
+    margin-top: 24px;
+}
+
+#chooseImgTxt1{
+
+    font-family: Fira Go light;
+    margin-right: 4px;
+}
+
+#chooseImgTxt2{
+    text-decoration: underline;
+    cursor: pointer;
+}
