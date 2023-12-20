@@ -18,6 +18,10 @@ body{
     padding: 40px 0 0 76px;
 }
 
+.form-div-main{
+    margin: 40px 0 0 360px;
+}
+
 .form-header-text{
     font-size: 32px;
     margin-left: 240px;
@@ -30,7 +34,6 @@ body{
 .div-addBlog{
     display: flex;
     flex-direction: column;
-    margin: 40px 0 0 360px;
 }
 
 .image-input-div{
@@ -85,4 +88,19 @@ body{
 #chooseImgTxt2{
     text-decoration: underline;
     cursor: pointer;
+}
+
+.author-header-div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.author-input-div{
+    display: flex;
+    flex-direction: column;
+}
+.header-input-div{
+    display: flex;
+    flex-direction: column;
 }

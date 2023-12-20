@@ -37,16 +37,6 @@ var settings = {
   method: "GET",
   timeout: 0,
 };
-function hexToRgb(hex) {
-  hex = hex.replace(/^#/, "");
-
-  var bigint = parseInt(hex, 16);
-  var r = (bigint >> 16) & 255;
-  var g = (bigint >> 8) & 255;
-  var b = bigint & 255;
-
-  return "rgb(" + r + ", " + g + ", " + b + ",0.08)";
-}
 
 $.ajax(settings).done(function (response) {
   console.log(response);
@@ -60,7 +50,7 @@ $.ajax(settings).done(function (response) {
       .addClass("categorie-btn")
       .css({
         color: category.text_color,
-        background: hexToRgb(category.background_color),
+        background: category.background_color,
       });
     container.append(paragraph);
   });

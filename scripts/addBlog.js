@@ -92,4 +92,38 @@ function handleFileSelection(files) {
     dragArea.style.display = "none";
 }
 
-//
+// Validations
+const validations = {
+    'authorInput': [
+        {
+            condition: value => value.length >= 4,
+            errorMsgId: 'authorInputError1'
+        },
+        {
+            condition: value => value.trim().split(/\s+/).length >= 2,
+            errorMsgId: 'authorInputError2'
+        },
+        {
+            condition: value => /^[ა-ჰ\s]+$/u.test(value),
+            errorMsgId: 'authorInputError3'
+        }
+    ],
+    'headerInput': [
+        {
+            condition: value => value.length >= 4,
+            errorMsgId: 'authorInputError1'
+        },
+        {
+            condition: value => value.trim().split(/\s+/).length >= 2,
+            errorMsgId: 'authorInputError2'
+        }
+    ]
+};
+
+function validateInput(input) {
+
+    validations[input].forEach(validation => {
+        const errorMsgId = validation;
+        console.log(errorMsgId);
+    });
+}
