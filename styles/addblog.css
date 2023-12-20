@@ -34,21 +34,46 @@ body{
 }
 
 .image-input-div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 600px;
     height: 180px;
     margin-top: 20px;
     border-radius: 12px;
     border: 1px dashed #85858D;
     background: #F4F3FF;
+    
+}
+#dropAreaImg{
+    margin: 48px 280px 0 280px;
+}
+
+.img-input-success{
+    display: none;
+    width: 600px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #F2F2FA;
+    margin-top: 8px;
+}
+.img-input-success1{
+    display: flex;
+    margin-left: 16px;
+}
+#imgSuccess1{
+    margin-top: 16px;
+}
+
+#imgSuccessSpan{
+    font-family: Fira Go light;
+    margin: 18px 0 0 12px;
+}
+#deleteImg{
+    margin: 16px 0 0 410px;
+    cursor: pointer;
 }
 
 .img-input-text{
-    display: flex;
-    margin-top: 24px;
+    margin: 24px 0 0 164px;
 }
 
 #chooseImgTxt1{

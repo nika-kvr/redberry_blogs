@@ -17,12 +17,9 @@ header{
     margin: 20px 76px 20px 0;
     color: #FFF;
     border-radius: 8px;
-    
-}
-
-.login-btn:hover{
     cursor: pointer;
 }
+
 
 #img1{
     margin-left: 76px;
@@ -59,12 +56,9 @@ header{
     border-radius: 30px;
     white-space: nowrap;
     display: inline-block;
-
-}
-
-.categorie-btn:hover{
     cursor: pointer;
 }
+
 
 
 #modal{
@@ -92,8 +86,6 @@ header{
     width: 24px;
     height: 24px;
     margin: 20px 0 0 436px;
-}
-#dialogClose:hover{
     cursor: pointer;
 }
 
@@ -142,11 +134,8 @@ header{
     color: #FFF;
     border: none;
     margin-top: 24px;
-
-}
-
-#dialogLoginBtn:hover{
     cursor: pointer;
+
 }
 
 .dialog-email-error-msg{
@@ -198,11 +187,9 @@ header{
     color: #FFF;
     font-size: 14px;
     margin-top: 48px;
-}
-
-.success-btn:hover{
     cursor: pointer;
 }
+
 
 #addBlogbtn{
     display: none;
