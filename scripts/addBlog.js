@@ -92,7 +92,7 @@ function handleFileSelection(files) {
     dragArea.style.display = "none";
 }
 
-// Validations
+// Validations  
 const validations = {
     'authorInput': [
         {
@@ -110,20 +110,33 @@ const validations = {
     ],
     'headerInput': [
         {
-            condition: value => value.length >= 4,
-            errorMsgId: 'authorInputError1'
-        },
+            condition: value => value.length >= 2,
+            errorMsgId: 'headerInputError'
+        }
+    ],
+    'aboutInput': [
         {
-            condition: value => value.trim().split(/\s+/).length >= 2,
-            errorMsgId: 'authorInputError2'
+            condition: value => value.length >= 2,
+            errorMsgId: 'aboutInputError'
+        }
+    ],
+    'emailInput': [
+        {
+            condition: value => value.endsWith('@redberry.ge'),
+            errorMsgId: 'emailInputError'
         }
     ]
 };
 
 function validateInput(input) {
+    const inputValue = document.getElementById(input).value;
 
     validations[input].forEach(validation => {
-        const errorMsgId = validation;
-        console.log(errorMsgId);
+        const validationSpan = document.getElementById(validation.errorMsgId);
+        if(validation.condition(inputValue)){
+            validationSpan.style.color = "#14D81C";
+        }else{
+            validationSpan.style.color = "#EA1919";
+        }
     });
 }

@@ -92,7 +92,6 @@ body{
 
 .author-header-div{
     display: flex;
-    align-items: center;
     justify-content: flex-start;
 }
 
@@ -103,4 +102,43 @@ body{
 .header-input-div{
     display: flex;
     flex-direction: column;
+}
+
+.input-span{
+    color: #85858D;
+    font-family: Fira Go light;
+}
+
+.about-div{
+    display: flex;
+    flex-direction: column;
+}
+
+#aboutInput{
+    width: 600px;
+    height: 124px;
+    resize: none;
+}
+
+.date-category-div{
+    display: flex;
+}
+
+.date-input-div{
+    display: flex;
+    flex-direction: column;
+}
+.categories-input-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.email-div{
+    display: flex;
+    flex-direction: column;
+}
+
+#emailInput{
+    width: 288px;
+    height: 44px;
 }

@@ -52,16 +52,35 @@
                         <div class="author-input-div">
                             <label for="authorInput">ავტორი *</label>
                             <input type="text" id="authorInput" name="authorInput" oninput="validateInput('authorInput')">
-                            <span id="authorInputError1">მინიმუმ 4 სიმბოლო</span>
-                            <span id="authorInputError2">მინიმუმ ორი სიტყვა</span>
-                            <span id="authorInputError3">მხოლოდ ქართული სიმბოლოები</span>
+                            <span class="input-span" id="authorInputError1">მინიმუმ 4 სიმბოლო</span>
+                            <span class="input-span" id="authorInputError2">მინიმუმ ორი სიტყვა</span>
+                            <span  class="input-span"id="authorInputError3">მხოლოდ ქართული სიმბოლოები</span>
   
                         </div>
                         <div class="header-input-div">
                             <label for="headerInput">სათაური *</label>
                             <input type="text" id="headerInput" name="headerInput" oninput="validateInput('headerInput')">
-                            <span id="headerInputError"></span>
+                            <span class="input-span" id="headerInputError">მინიმუმ ოთხი სიმბოლო</span>
                         </div>
+                    </div>
+                    <div class="about-div">
+                        <label for="aboutInput">სათაური *</label>
+                        <textarea id="aboutInput" name="aboutInput" oninput="validateInput('aboutInput')" ></textarea>
+                        <span class="input-span" id="aboutInputError">მინიმუმ ოთხი სიმბოლო</span>
+                    </div>
+                    <div class="date-category-div" >
+                        <div class="date-input-div">
+                            <label for="dateInput">გამოქვეყნების თარიღი *</label>
+                            <input type="date" id="dateInput" name="dateInput" oninput="validateInput('dateInput')">
+                        </div>
+                        <div class="categories-input-div">  
+                            <label for="categoriesInput">გამოქვეყნების თარიღი *</label>
+                        </div>
+                    </div>
+                    <div class="email-div">
+                        <label for="emailInput">ელ-ფოსტა *</label>
+                        <input type="text" id="emailInput" name="emailInput" oninput="validateInput('emailInput')">
+                        <span class="input-span" id="emailInputError">მეილი უნდა მთავრდებოდეს @redberry.ge-ით</span>
                     </div>
                     <button type="button" onclick="submitForm()" id="submitButton" disabled>გამოქვეყნება</button>
             </form>
@@ -70,3 +89,4 @@
     <script src="scripts/addBlog.js"></script>
 </body>
 </html>
+
