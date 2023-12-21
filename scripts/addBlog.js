@@ -109,48 +109,54 @@ const validations = {
         {
             condition: value => value.length >= 4,
             errorMsgId: 'authorInputError1',
-            isInputValid: false
+            isInputValid: JSON.stringify(localStorage.getItem('authorInputError1')) || false
         },
         {
             condition: value => value.trim().split(/\s+/).length >= 2,
             errorMsgId: 'authorInputError2',
-            isInputValid: false
+            isInputValid: JSON.parse(localStorage.getItem('authorInputError2')) || false
         },
         {
             condition: value => /^[ა-ჰ\s]+$/u.test(value),
             errorMsgId: 'authorInputError3',
-            isInputValid: false
+            isInputValid: JSON.parse(localStorage.getItem('authorInputError3')) || false
         }
     ],
     'headerInput': [
         {
             condition: value => value.length >= 2,
             errorMsgId: 'headerInputError',
-            isInputValid: false
+            isInputValid: JSON.parse(localStorage.getItem('headerInputError')) || false
         }
     ],
     'aboutInput': [
         {
             condition: value => value.length >= 2,
             errorMsgId: 'aboutInputError',
-            isInputValid: false
+            isInputValid: JSON.parse(localStorage.getItem('aboutInputError')) || false
         }
     ],
     'emailInput': [
         {
-            condition: value => value.endsWith('@redberry.ge'),
+            condition: value => value.endsWith('@redberry.ge') || value.length === 0,
             errorMsgId: 'emailInputError',
-            isInputValid: false
+            isInputValid: JSON.parse(localStorage.getItem('emailInputError')) || false
         }
     ]
 };
 
 //check all validations for sbmt btn
-var allInputsValid = Object.keys(validations).every(inputKey =>
-    validations[inputKey].every(validation => validation.isInputValid)
-);
 
-if(allInputsValid){
+
+console.log(validations['emailInput'][0].isInputValid);
+
+function areAllInputsValid(validations) {
+    return Object.keys(validations).every(inputKey =>
+        validations[inputKey].every(validation => validation.isInputValid)
+    );
+}
+
+if(areAllInputsValid(validations)){
     submitBtn.disabled = false;
 }else{
     submitBtn.disabled = true;
@@ -166,22 +172,33 @@ function validateInput(input) {
     validations[input].forEach(validation => {
         const validationSpan = document.getElementById(validation.errorMsgId);
         if(validation.condition(inputValue)){
-            validationSpan.style.color = "#14D81C";
+            if(document.getElementById(input).id ==='emailInput' && inputValue.length===0){
+                validationSpan.style.display = "none";
+            }
+            validationSpan.classList.add('span-valid');
+            validationSpan.classList.remove('span-error');
             validation.isInputValid = true;
+            localStorage.setItem(validation.errorMsgId, JSON.stringify(true))
         }else{
-            validationSpan.style.color = "#EA1919";
+            if(document.getElementById(input).id ==='emailInput' && inputValue.length>0){
+                validationSpan.style.display = "block";
+            }
+            validationSpan.classList.add('span-error');
+            validationSpan.classList.remove('span-valid');
             validation.isInputValid = false;
+            localStorage.setItem(validation.errorMsgId, JSON.stringify(false))
         }
-        console.log(validation.isInputValid)
     });
 
-    if(allInputsValid){
+
+
+    if(areAllInputsValid(validations)){
         submitBtn.disabled = false;
     }else{
         submitBtn.disabled = true;
     }
 }
 
-// add local storage if isinputvalif true or false and getItem() in allInputsValid
-
-// save date input to localstorage
+// create categories input
+// validate 
+// validation color to localstorage
