@@ -7,10 +7,12 @@ if(!localStorage.getItem('loggedInUser')){
 // Select buttons
 const backBtn = document.getElementById("backBtn");
 
-
 backBtn.addEventListener("click", () => {
     window.location.href = "index.html";
 });
+
+
+
 
 
 // Image input
@@ -52,17 +54,17 @@ function allowDrop(event) {
 
 function drop(event) {
     event.preventDefault();
-
+    
     var files = event.dataTransfer.files;
-
+    
     if (files.length > 0) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var imageUrl = e.target.result;
-        localStorage.setItem('imageURL', imageUrl);
-        
-      };
-      reader.readAsDataURL(files[0]);
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var imageUrl = e.target.result;
+            localStorage.setItem('imageURL', imageUrl);
+            
+        };
+        reader.readAsDataURL(files[0]);
     }
     imgSuccess.style.display = "block";
     dragArea.style.display = "none";
@@ -76,21 +78,102 @@ function openFileInput(){
 
 function handleFileSelection(files) {
     selectedFiles = [];
-
+    
     selectedFiles.push(files[0]);
-
+    
     if (selectedFiles) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
             localStorage.setItem('imageURL', e.target.result);
         };
-
+        
         reader.readAsDataURL(selectedFiles[0]);
     }
     imgSuccess.style.display = "block";
     dragArea.style.display = "none";
 }
+
+
+
+//Get categories input
+if(localStorage.getItem("categoriesArray")){
+    var selectedCategoriesarr = localStorage.getItem("categoriesArray").split(',');
+}else{
+    var selectedCategoriesarr = []
+}
+
+console.log(selectedCategoriesarr)
+
+
+var settings = {
+    url: "https://api.blog.redberryinternship.ge/api/categories",
+    method: "GET",
+    timeout: 0,
+  };
+
+$.ajax(settings).done(function (response) {
+    const categories = response.data;
+    const container = $(".categories-border");
+    container.hide()
+  
+    categories.forEach(function (category) {
+      const categorie = $("<div>")
+        .text(category.title)
+        .addClass("categorie-btn")
+        .attr('id', category.id)
+        .on('click', function () {
+            const newCategorie = $("<div>")
+            .text(category.title + " x")
+            .addClass("selected-categories")
+            .attr('id', category.id)
+            .on('click', function () {
+                selectedCategoriesarr = selectedCategoriesarr.filter(function (element) {
+                    return element !== category.id;
+                });
+                localStorage.setItem("categoriesArray", selectedCategoriesarr)
+                $(this).remove();
+            })
+            .css({
+                color: category.text_color,
+                background: category.background_color,
+              });
+            if(selectedCategoriesarr.length > 0 ){
+                selectedCategoriesarr.forEach(element => {
+                    if(element == category.id){               
+                    }else{
+                        const selectedCategories = $("#selectedCategories");
+                        selectedCategories.append(newCategorie);
+                        selectedCategoriesarr.push(category.id)
+                        localStorage.setItem("categoriesArray", selectedCategoriesarr)
+                    }
+                });
+
+            }else{
+                const selectedCategories = $("#selectedCategories");
+                selectedCategories.append(newCategorie);
+                selectedCategoriesarr.push(category.id)
+                localStorage.setItem("categoriesArray", selectedCategoriesarr)  
+            }
+
+          })
+        .css({
+          color: category.text_color,
+          background: category.background_color,
+        });
+      container.append(categorie);
+    });
+});
+
+// Add listener to a categories div button
+$(document).ready(function () {
+    $('#categoriesBtnShow').click(function () {
+        $(".categories-border").toggle()
+    });
+});
+
+
+
 
 // Validations  
 const submitBtn = document.getElementById('submitButton');
@@ -147,8 +230,6 @@ const validations = {
 
 //check all validations for sbmt btn
 
-
-console.log(validations['emailInput'][0].isInputValid);
 
 function areAllInputsValid(validations) {
     return Object.keys(validations).every(inputKey =>

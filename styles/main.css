@@ -19,3 +19,18 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
+.categorie-btn{
+    font-family: 'Fira Go',Helvetica;
+    border: none;
+    width: auto;
+    height: 32px;
+    padding: 8px 16px;
+    margin-left: 24px;
+    margin-top: 24px;
+    color: #FFF;
+    border-radius: 30px;
+    white-space: nowrap;
+    display: inline-block;
+    cursor: pointer;
+}

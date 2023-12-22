@@ -60,13 +60,13 @@
                         <div class="header-input-div">
                             <label for="headerInput">სათაური *</label>
                             <input class="input" type="text" id="headerInput" name="headerInput" oninput="validateInput('headerInput')">
-                            <span class="input-span" id="headerInputError">მინიმუმ ოთხი სიმბოლო</span>
+                            <span class="input-span" id="headerInputError">მინიმუმ ორი სიმბოლო</span>
                         </div>
                     </div>
                     <div class="about-div">
                         <label for="aboutInput">აღწერა *</label>
                         <textarea class="input" id="aboutInput" name="aboutInput" oninput="validateInput('aboutInput')" ></textarea>
-                        <span class="input-span" id="aboutInputError">მინიმუმ ოთხი სიმბოლო</span>
+                        <span class="input-span" id="aboutInputError">მინიმუმ ორი სიმბოლო</span>
                     </div>
                     <div class="date-category-div" >
                         <div class="date-input-div">
@@ -74,7 +74,18 @@
                             <input class="input" type="date" id="dateInput" name="dateInput">
                         </div>
                         <div class="categories-input-div">  
-                            <label for="categoriesInput">გამოქვეყნების თარიღი *</label>
+                            <label for="categoriesInput">კატეგორია *</label>
+                            <div class="categories-container">
+                                <div id="selectedCategories" class="added-categories-div">
+                                </div>
+                                <div id="categoriesBtnShow" class="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M16.6004 7.45825L11.1671 12.8916C10.5254 13.5333 9.47539 13.5333 8.83372 12.8916L3.40039 7.45825" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="categories-border">
+                            </div>
                         </div>
                     </div>
                     <div class="email-div">
@@ -89,4 +100,3 @@
     <script src="scripts/addBlog.js"></script>
 </body>
 </html>
-
