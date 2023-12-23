@@ -84,7 +84,7 @@ $.ajax(settings).done(function (response) {
     let selectedDiv = document.getElementById(element);
     let selectedcont = document.getElementById("selectedCategories");
     var newDiv = document.createElement("div");
-    newDiv.textContent = selectedDiv.textContent;
+    newDiv.textContent = selectedDiv.textContent + " x";
     newDiv.classList.add("selected-categories");
     var computedStyle = getComputedStyle(selectedDiv);
     var backgroundColor = computedStyle.backgroundColor;
@@ -301,6 +301,32 @@ function handleFileSelection(files) {
   }
   imgSuccess.style.display = "block";
   dragArea.style.display = "none";
+}
+
+//Post request
+function submitForm(){
+  var form = new FormData();
+  var authorInpur = document.getElementById('authorInput');
+
+  form.append('author', authorInpur.value);
+
+  var settings = {
+    "url": "https://api.blog.redberryinternship.ge/api/blog",
+    "method": "POST",
+    "timeout": 0,
+    "headers": {
+      "Authorization": "Bearer06c849e6edaa8a40645ce20d6918e3815b03cffe83472ce974b896837bc18b1e",
+      "Content-Type": "application/json"
+    },
+    "processData": false,
+    "mimeType": "multipart/form-data",
+    "contentType": false,
+    "data": form
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
 }
 
 // create categories input
