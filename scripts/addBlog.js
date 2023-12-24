@@ -203,7 +203,6 @@ function validateInput(input) {
       ) {
         validationSpan.style.display = "none";
       }
-      console.log('siri dawere')
       if (document.getElementById(input).id === "dateInput"){
         true
       }
@@ -277,7 +276,6 @@ function showUploadHidePreview() {
   }
 }
 function handleFileSelection(files) {
-  console.log(files);
   // Check if there's at least one file
   if (files.length > 0) {
     const imageFile = files[0];
