@@ -49,6 +49,7 @@ $.ajax(settings).done(function (response) {
             });
             localStorage.setItem("categoriesArray", selectedCategoriesarr);
             $(this).remove();
+            isCategoryProvided()
           })
           .css({
             color: category.text_color,
@@ -61,12 +62,14 @@ $.ajax(settings).done(function (response) {
             selectedCategories.append(newCategorie);
             selectedCategoriesarr.push(category.id);
             localStorage.setItem("categoriesArray", selectedCategoriesarr);
+            isCategoryProvided()
           }
         } else {
           const selectedCategories = $("#selectedCategories");
           selectedCategories.append(newCategorie);
           selectedCategoriesarr.push(category.id);
           localStorage.setItem("categoriesArray", selectedCategoriesarr);
+          isCategoryProvided()
         }
       })
       .css({
@@ -92,8 +95,10 @@ $.ajax(settings).done(function (response) {
       });
       localStorage.setItem("categoriesArray", selectedCategoriesarr);
       this.remove();
+      isCategoryProvided()
     });
     selectedcont.appendChild(newDiv);
+    isCategoryProvided()
   });
 });
 
@@ -161,6 +166,13 @@ const validations = {
         JSON.parse(localStorage.getItem("emailInputError")) || false,
     },
   ],
+  dateInput: [
+    {
+      condition: (value) => value.length > 0,
+      errorMsgId: "dateInputError",
+      isInputValid: localStorage.getItem("dateInput") || false,
+    },
+  ],
 };
 
 //check all validations for sbmt btn
@@ -191,6 +203,10 @@ function validateInput(input) {
       ) {
         validationSpan.style.display = "none";
       }
+      console.log('siri dawere')
+      if (document.getElementById(input).id === "dateInput"){
+        true
+      }
       validationSpan.classList.add("span-valid");
       validationSpan.classList.remove("span-error");
       validation.isInputValid = true;
@@ -209,34 +225,157 @@ function validateInput(input) {
     }
   });
 
-  if (areAllInputsValid(validations)) {
+  if (areAllInputsValid(validations) && isImageProvided()) {
     submitBtn.disabled = false;
   } else {
     submitBtn.disabled = true;
   }
+  isCategoryProvided()
 }
 
 // Image input
 
+let formData = new FormData();
 
-//validate image input
+function dragOverHandler(event) {
+  // Prevent default behavior to allow drop
+  event.preventDefault();
+}
+
+function dropHandler(event) {
+  // Prevent default behavior to open as a link
+  event.preventDefault();
+
+  // Get the dropped files
+  const files = event.dataTransfer.files;
+
+  // Handle the dropped files
+  handleFileSelection(files);
+}
+
+function openFileUploader() {
+  // Trigger the hidden file input
+  const fileInput = document.getElementById('fileInput');
+  fileInput.click();
+}
+
+const hideUploadShowPreview = (imageFile) => {
+  document.getElementById('imagePreviewWrapper').classList.add('shown')
+  document.getElementById('imgSuccessSpan').innerText = imageFile.name
+  document.getElementById('dropZone').style.display = 'none'
+}
+
+function showUploadHidePreview() {
+  document.getElementById('imagePreviewWrapper').classList.remove('shown')
+  document.getElementById('imgSuccessSpan').innerText = " "
+  document.getElementById('dropZone').style.display = 'flex'
+  const imageItem = localStorage.getItem('imageURL')
+  if (imageItem)
+  {
+    localStorage.setItem('imageURL', '')
+    fileUploadValidation(false)
+  }
+}
+function handleFileSelection(files) {
+  console.log(files);
+  // Check if there's at least one file
+  if (files.length > 0) {
+    const imageFile = files[0];
+
+    // Check if the dropped file is an image
+    if (imageFile.type.startsWith('image/')) {
+      // Display the image preview
+      const previewImage = document.getElementById('previewImage');
+      const reader = new FileReader();
 
 
+      // Shown Image Preview
+      hideUploadShowPreview(imageFile)
 
-var formData = new FormData();
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+
+        // Save image data in formData
+        formData.set('image', imageFile);
+
+        // Save image data in localStorage
+        localStorage.setItem('imageURL', e.target.result);
+        fileUploadValidation(true)
+      };
 
 
-//Post request
+      reader.readAsDataURL(imageFile);
+    } else {
+      alert('Please drop an image file.');
+    }
+  }
+}
+
+function triggerFileInput() {
+  // Trigger the hidden file input on button click
+  const fileInput = document.getElementById('fileInput');
+  fileInput.click();
+}
+
+window.addEventListener('load', () => {
+  const fileData = localStorage.getItem('imageURL');
+
+  if (fileData) {
+    const previewImage = document.getElementById('previewImage');
+    previewImage.src = fileData;
+
+    // Save image data in formData if not already set
+    if (!formData.has('image')) {
+      const byteCharacters = atob(fileData.split(',')[1]);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/png' });
+      const fileOptions = { type: 'image/png' };
+      const file = new File([blob], 'BlogImg.JPEG', fileOptions);
+
+      hideUploadShowPreview(file)
+      formData.set('image', file);
+      fileUploadValidation(true);
+      isCategoryProvided()
+    }
+  } else {
+    fileUploadValidation(false);
+    isCategoryProvided()
+  }
+});
+
+
+function fileUploadValidation(hasImage){
+  document.getElementById("submitButton").disabled = hasImage !== true;
+}
+
+function isImageProvided(){
+  const imageItem = localStorage.getItem('imageURL')
+  return !!imageItem;
+}
+function isCategoryProvided(){
+  if(selectedCategoriesarr.length === 0){
+    submitBtn.disabled = true
+  }else{
+    submitBtn.disabled = false
+  }
+}
+
+
+// Post request
 function submitForm(e) {
   e.preventDefault();
 
   // Append other form fields to formData
-  formData.append('title', document.getElementById('headerInput').value);
-  formData.append('description', document.getElementById('aboutInput').value);
-  formData.append('author', document.getElementById('authorInput').value);
-  formData.append('publish_date', document.getElementById('dateInput').value);
-  formData.append('categories', JSON.stringify(selectedCategoriesarr));
-  formData.append('email', document.getElementById('emailInput').value);
+  formData.append("title", document.getElementById("headerInput").value);
+  formData.append("description", document.getElementById("aboutInput").value);
+  formData.append("author", document.getElementById("authorInput").value);
+  formData.append("publish_date", document.getElementById("dateInput").value);
+  formData.append("categories", JSON.stringify(selectedCategoriesarr));
+  formData.append("email", document.getElementById("emailInput").value);
 
   // Use the fetch API for the POST request
   var settings = {
@@ -259,6 +398,3 @@ function submitForm(e) {
   });
 }
 
-// create categories input
-// validate
-// validation color to localstorage

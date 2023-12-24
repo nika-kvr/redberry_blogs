@@ -42,6 +42,17 @@ body {
   border-radius: 12px;
   border: 1px dashed #85858d;
   background: #f4f3ff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.shown{
+  display: block !important;
+}
+.hidden{
+  display: none !important;
 }
 #dropAreaImg {
   margin: 48px 280px 0 280px;
@@ -67,6 +78,7 @@ body {
 #imgSuccessSpan {
   font-family: Fira Go light;
   margin: 18px 0 0 12px;
+  max-width: 50px;
 }
 #deleteImg {
   margin: 16px 0 0 410px;
