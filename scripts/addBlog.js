@@ -10,8 +10,6 @@ backBtn.addEventListener("click", () => {
   window.location.href = "index.html";
 });
 
-
-
 //Get categories input
 if (localStorage.getItem("categoriesArray")) {
   var selectedCategoriesarr = localStorage
@@ -21,7 +19,6 @@ if (localStorage.getItem("categoriesArray")) {
 } else {
   var selectedCategoriesarr = [];
 }
-
 
 var settings = {
   url: "https://api.blog.redberryinternship.ge/api/categories",
@@ -88,7 +85,7 @@ $.ajax(settings).done(function (response) {
     newDiv.classList.add("selected-categories");
     var computedStyle = getComputedStyle(selectedDiv);
     var backgroundColor = computedStyle.backgroundColor;
-    newDiv.style.backgroundColor  = backgroundColor;
+    newDiv.style.backgroundColor = backgroundColor;
     newDiv.addEventListener("click", function () {
       selectedCategoriesarr = selectedCategoriesarr.filter(function (element) {
         return element !== +selectedDiv.id;
@@ -221,109 +218,42 @@ function validateInput(input) {
 
 // Image input
 
-const dragArea = document.querySelector(".image-input-div");
-const imgSuccess = document.querySelector(".img-input-success");
-const imgSuccessSpan = document.querySelector("#imgSuccessSpan");
-const deleteImg = document.getElementById("deleteImg");
 
-var selectedFiles = [];
-imageUrl = localStorage.getItem("imageURL");
-selectedFiles.push(imageUrl);
-
-if(imageUrl) {
-  imgSuccess.style.display = "block";
-  dragArea.style.display = "none";
-}
 //validate image input
-function validateImg(){
-  if(imageUrl.length === 0 || !areAllInputsValid(validations)){
-  submitBtn.disabled = true;
-  }
-}
-validateImg()
 
 
-deleteImg.addEventListener("click", () => {
-  localStorage.setItem("imageURL", "");
-  imgSuccess.style.display = "none";
-  dragArea.style.display = "block";
-  
-});
 
-dragArea.addEventListener("dragover", (event) => {
-  event.preventDefault();
-  dragArea.style.background = "#F1EFFB";
-});
+var formData = new FormData();
 
-dragArea.addEventListener("dragleave", () => {
-  dragArea.style.background = "#F4F3FF";
-});
-
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-function drop(event) {
-  event.preventDefault();
-
-  var files = event.dataTransfer.files;
-
-  if (files.length > 0) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      var imageUrl = e.target.result;
-      localStorage.setItem("imageURL", imageUrl);
-    };
-    reader.readAsDataURL(files[0]);
-  }
-  imgSuccess.style.display = "block";
-  dragArea.style.display = "none";
-}
-
-function openFileInput() {
-  var fileInput = document.getElementById("fileInput");
-  fileInput.click();
-}
-
-function handleFileSelection(files) {
-  selectedFiles = [];
-
-  selectedFiles.push(files[0]);
-
-  if (selectedFiles) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      localStorage.setItem("imageURL", e.target.result);
-    };
-
-    reader.readAsDataURL(selectedFiles[0]);
-  }
-  imgSuccess.style.display = "block";
-  dragArea.style.display = "none";
-}
 
 //Post request
-function submitForm(){
-  var form = new FormData();
-  var authorInpur = document.getElementById('authorInput');
+function submitForm(e) {
+  e.preventDefault();
 
-  form.append('author', authorInpur.value);
+  // Append other form fields to formData
+  formData.append('title', document.getElementById('headerInput').value);
+  formData.append('description', document.getElementById('aboutInput').value);
+  formData.append('author', document.getElementById('authorInput').value);
+  formData.append('publish_date', document.getElementById('dateInput').value);
+  formData.append('categories', JSON.stringify(selectedCategoriesarr));
+  formData.append('email', document.getElementById('emailInput').value);
 
+  // Use the fetch API for the POST request
   var settings = {
-    "url": "https://api.blog.redberryinternship.ge/api/blog",
-    "method": "POST",
-    "timeout": 0,
-    "headers": {
-      "Authorization": "Bearer06c849e6edaa8a40645ce20d6918e3815b03cffe83472ce974b896837bc18b1e",
-      "Content-Type": "application/json"
+    url: "https://api.blog.redberryinternship.ge/api/blogs",
+    method: "POST",
+    timeout: 0,
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer ed3851e0be618ff44a295b70142460b78bbf203358b051bf6c101791e84f077e",
     },
-    "processData": false,
-    "mimeType": "multipart/form-data",
-    "contentType": false,
-    "data": form
+    processData: false,
+    mimeType: "multipart/form-data",
+    contentType: false,
+    data: formData,
   };
-  
+
   $.ajax(settings).done(function (response) {
     console.log(response);
   });
