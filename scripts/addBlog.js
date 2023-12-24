@@ -226,10 +226,11 @@ function validateInput(input) {
 
   if (areAllInputsValid(validations) && isImageProvided()) {
     submitBtn.disabled = false;
+    isCategoryProvided()
   } else {
+    isCategoryProvided()
     submitBtn.disabled = true;
   }
-  isCategoryProvided()
 }
 
 // Image input
@@ -383,7 +384,7 @@ function submitForm(e) {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer ed3851e0be618ff44a295b70142460b78bbf203358b051bf6c101791e84f077e",
+        "Bearer 68a4399dfe02608c084486976c178a211bab0ce0ff4ec2efcdbe8bca761f7a39",
     },
     processData: false,
     mimeType: "multipart/form-data",
