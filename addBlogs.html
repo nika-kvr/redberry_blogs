@@ -22,19 +22,19 @@
         </div>
         <div class="form-div-main">
             <form id="myForm">
-                    <label>ატვირთეთ ფოტო</label>
-                        <div>
-                            <div id="dropZone"
-                                 class="image-input-div"
-                                 ondrop="dropHandler(event)"
-                                 ondragover="dragOverHandler(event)"
-                                 onclick="openFileUploader()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin-bottom: 1.5rem;">
-                                    <path opacity="0.4" d="M36.233 15.7333H3.33301V10.7C3.33301 6.63333 6.63301 3.33333 10.6997 3.33333H14.583C17.2997 3.33333 18.1497 4.21667 19.233 5.66667L21.5663 8.76667C22.083 9.45 22.1497 9.55 23.1163 9.55H27.7663C31.7163 9.53333 35.083 12.1333 36.233 15.7333Z" fill="#5D37F3"/>
-                                    <path d="M36.6497 18.0667C36.6163 17.25 36.483 16.4833 36.233 15.7333H3.33301V27.75C3.33301 32.6667 7.33301 36.6667 12.2497 36.6667H27.7497C32.6663 36.6667 36.6663 32.6667 36.6663 27.75V18.45C36.6663 18.3333 36.6663 18.1833 36.6497 18.0667ZM24.1663 27.0833H21.3497V30C21.3497 30.6833 20.783 31.25 20.0997 31.25C19.4163 31.25 18.8497 30.6833 18.8497 30V27.0833H15.833C15.1497 27.0833 14.583 26.5167 14.583 25.8333C14.583 25.15 15.1497 24.5833 15.833 24.5833H18.8497V21.6667C18.8497 20.9833 19.4163 20.4167 20.0997 20.4167C20.783 20.4167 21.3497 20.9833 21.3497 21.6667V24.5833H24.1663C24.8497 24.5833 25.4163 25.15 25.4163 25.8333C25.4163 26.5167 24.8497 27.0833 24.1663 27.0833Z" fill="#5D37F3"/>
-                                </svg>
-                                <p>ჩააგდეთ ფაილი აქ ან <b style="cursor:pointer;"><u>აირჩიეთ ფაილი</u></b></p>
-                                <img id="previewImage" style="width: 150px; border-radius: 5px; display: none;">
+                <label>ატვირთეთ ფოტო</label>
+                <div>
+                    <div id="dropZone"
+                        class="image-input-div"
+                        ondrop="dropHandler(event)"
+                        ondragover="dragOverHandler(event)"
+                        onclick="openFileUploader()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin-bottom: 1.5rem;">
+                            <path opacity="0.4" d="M36.233 15.7333H3.33301V10.7C3.33301 6.63333 6.63301 3.33333 10.6997 3.33333H14.583C17.2997 3.33333 18.1497 4.21667 19.233 5.66667L21.5663 8.76667C22.083 9.45 22.1497 9.55 23.1163 9.55H27.7663C31.7163 9.53333 35.083 12.1333 36.233 15.7333Z" fill="#5D37F3"/>
+                            <path d="M36.6497 18.0667C36.6163 17.25 36.483 16.4833 36.233 15.7333H3.33301V27.75C3.33301 32.6667 7.33301 36.6667 12.2497 36.6667H27.7497C32.6663 36.6667 36.6663 32.6667 36.6663 27.75V18.45C36.6663 18.3333 36.6663 18.1833 36.6497 18.0667ZM24.1663 27.0833H21.3497V30C21.3497 30.6833 20.783 31.25 20.0997 31.25C19.4163 31.25 18.8497 30.6833 18.8497 30V27.0833H15.833C15.1497 27.0833 14.583 26.5167 14.583 25.8333C14.583 25.15 15.1497 24.5833 15.833 24.5833H18.8497V21.6667C18.8497 20.9833 19.4163 20.4167 20.0997 20.4167C20.783 20.4167 21.3497 20.9833 21.3497 21.6667V24.5833H24.1663C24.8497 24.5833 25.4163 25.15 25.4163 25.8333C25.4163 26.5167 24.8497 27.0833 24.1663 27.0833Z" fill="#5D37F3"/>
+                        </svg>
+                        <p>ჩააგდეთ ფაილი აქ ან <b style="cursor:pointer;"><u>აირჩიეთ ფაილი</u></b></p>
+                        <img id="previewImage" style="width: 150px; border-radius: 5px; display: none;">
                             </div>
                             <div class="img-input-success" id="imagePreviewWrapper">
                                 <div class="img-input-success1">
@@ -58,21 +58,21 @@
                     <div class="author-header-div">
                         <div class="author-input-div">
                             <label for="authorInput">ავტორი *</label>
-                            <input class="input" type="text" id="authorInput" name="authorInput" oninput="validateInput('authorInput')">
-                            <span class="input-span" id="authorInputError1">მინიმუმ 4 სიმბოლო</span>
-                            <span class="input-span" id="authorInputError2">მინიმუმ ორი სიტყვა</span>
-                            <span  class="input-span"id="authorInputError3">მხოლოდ ქართული სიმბოლოები</span>
+                            <input placeholder="შეიყვნეთ ავტორი" class="input" type="text" id="authorInput" name="authorInput" oninput="validateInput('authorInput')">
+                            <span class="input-span" id="authorInputError1">• მინიმუმ 4 სიმბოლო</span>
+                            <span class="input-span" id="authorInputError2">• მინიმუმ ორი სიტყვა</span>
+                            <span  class="input-span"id="authorInputError3">• მხოლოდ ქართული სიმბოლოები</span>
 
                         </div>
                         <div class="header-input-div">
                             <label for="headerInput">სათაური *</label>
-                            <input class="input" type="text" id="headerInput" name="headerInput" oninput="validateInput('headerInput')">
+                            <input placeholder="შეიყვნეთ სათაური" class="input" type="text" id="headerInput" name="headerInput" oninput="validateInput('headerInput')">
                             <span class="input-span" id="headerInputError">მინიმუმ ორი სიმბოლო</span>
                         </div>
                     </div>
                     <div class="about-div">
                         <label for="aboutInput">აღწერა *</label>
-                        <textarea class="input" id="aboutInput" name="aboutInput" oninput="validateInput('aboutInput')" ></textarea>
+                        <textarea placeholder="შეიყვნეთ აღწერა" class="input" id="aboutInput" name="aboutInput" oninput="validateInput('aboutInput')" ></textarea>
                         <span class="input-span" id="aboutInputError">მინიმუმ ორი სიმბოლო</span>
                     </div>
                     <div class="date-category-div" >
@@ -83,14 +83,12 @@
                         </div>
                         <div class="categories-input-div">
                             <label for="categoriesInput">კატეგორია *</label>
-                            <div class="categories-container">
+                            <div class="categories-container" id="categoriesContainerDiv">
                                 <div id="selectedCategories" class="added-categories-div">
                                 </div>
-                                <div id="categoriesBtnShow" class="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <svg id="categoriesBtnShow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <path d="M16.6004 7.45825L11.1671 12.8916C10.5254 13.5333 9.47539 13.5333 8.83372 12.8916L3.40039 7.45825" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </div>
                             </div>
                             <div class="categories-border">
                             </div>
@@ -98,12 +96,26 @@
                     </div>
                     <div class="email-div">
                         <label for="emailInput">ელ-ფოსტა *</label>
-                        <input class="input" type="text" id="emailInput" name="emailInput" oninput="validateInput('emailInput')">
+                        <input placeholder="Example@redberry.ge" class="input" type="text" id="emailInput" name="emailInput" oninput="validateInput('emailInput')">
                         <span class="input-span" id="emailInputError">მეილი უნდა მთავრდებოდეს @redberry.ge-ით</span>
                     </div>
                     <button type="button" onclick="submitForm(event)" id="submitButton">გამოქვეყნება</button>
             </form>
         </div>
+        <dialog id="blogModal"> 
+            <div class="blog-modal-div">
+                <svg onclick="returnToHomePage()" id="blogModalCloseSvg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M7.75781 16.2426L16.2431 7.75736" stroke="#1A1A1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.2431 16.2426L7.75781 7.75736" stroke="#1A1A1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg  class="blog-modal-div-svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+                    <path d="M32.0006 58.6667C46.6673 58.6667 58.6673 46.6667 58.6673 32C58.6673 17.3333 46.6673 5.33334 32.0006 5.33334C17.334 5.33334 5.33398 17.3333 5.33398 32C5.33398 46.6667 17.334 58.6667 32.0006 58.6667Z" fill="#14D81C"/>
+                    <path d="M20.666 32L28.2127 39.5467L43.3327 24.4533" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span id="modalSpan">ჩანაწერი წარმატებით დაემატა</span>
+                <button onclick="returnToHomePage()" class="blog-modal-div-btn">მთავარ გვერდზე დაბრუნება</button>
+            </div>
+        </dialog>
     </main>
     <script src="scripts/addBlog.js"></script>
 </body>

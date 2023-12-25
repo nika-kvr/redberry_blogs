@@ -10,6 +10,10 @@ backBtn.addEventListener("click", () => {
   window.location.href = "index.html";
 });
 
+function returnToHomePage(){
+  window.location.href = "index.html";
+}
+
 //Get categories input
 if (localStorage.getItem("categoriesArray")) {
   var selectedCategoriesarr = localStorage
@@ -49,7 +53,7 @@ $.ajax(settings).done(function (response) {
             });
             localStorage.setItem("categoriesArray", selectedCategoriesarr);
             $(this).remove();
-            isCategoryProvided()
+            // isCategoryProvided()
           })
           .css({
             color: category.text_color,
@@ -62,14 +66,14 @@ $.ajax(settings).done(function (response) {
             selectedCategories.append(newCategorie);
             selectedCategoriesarr.push(category.id);
             localStorage.setItem("categoriesArray", selectedCategoriesarr);
-            isCategoryProvided()
+            // isCategoryProvided()
           }
         } else {
           const selectedCategories = $("#selectedCategories");
           selectedCategories.append(newCategorie);
           selectedCategoriesarr.push(category.id);
           localStorage.setItem("categoriesArray", selectedCategoriesarr);
-          isCategoryProvided()
+          // isCategoryProvided()
         }
       })
       .css({
@@ -95,10 +99,10 @@ $.ajax(settings).done(function (response) {
       });
       localStorage.setItem("categoriesArray", selectedCategoriesarr);
       this.remove();
-      isCategoryProvided()
+      // isCategoryProvided()
     });
     selectedcont.appendChild(newDiv);
-    isCategoryProvided()
+    // isCategoryProvided()
   });
 });
 
@@ -185,8 +189,13 @@ function areAllInputsValid(validations) {
 
 if (areAllInputsValid(validations)) {
   submitBtn.disabled = false;
+  submitBtn.classList.add('enabled-btn')
+  submitBtn.classList.remove('disabled-btn')
+
 } else {
   submitBtn.disabled = true;
+  submitBtn.classList.remove('enabled-btn')
+  submitBtn.classList.add('disabled-btn')
 }
 
 function validateInput(input) {
@@ -224,12 +233,14 @@ function validateInput(input) {
     }
   });
 
-  if (areAllInputsValid(validations) && isImageProvided()) {
+  if (areAllInputsValid(validations) ) {
     submitBtn.disabled = false;
-    isCategoryProvided()
+    submitBtn.classList.add('enabled-btn')
+    submitBtn.classList.remove('disabled-btn')
   } else {
-    isCategoryProvided()
     submitBtn.disabled = true;
+    submitBtn.classList.remove('enabled-btn')
+    submitBtn.classList.add('disabled-btn')
   }
 }
 
@@ -273,7 +284,7 @@ function showUploadHidePreview() {
   if (imageItem)
   {
     localStorage.setItem('imageURL', '')
-    fileUploadValidation(false)
+    // fileUploadValidation(false)
   }
 }
 function handleFileSelection(files) {
@@ -283,23 +294,19 @@ function handleFileSelection(files) {
 
     // Check if the dropped file is an image
     if (imageFile.type.startsWith('image/')) {
-      // Display the image preview
+
       const previewImage = document.getElementById('previewImage');
       const reader = new FileReader();
 
-
-      // Shown Image Preview
       hideUploadShowPreview(imageFile)
 
       reader.onload = function (e) {
         previewImage.src = e.target.result;
 
-        // Save image data in formData
         formData.set('image', imageFile);
 
-        // Save image data in localStorage
         localStorage.setItem('imageURL', e.target.result);
-        fileUploadValidation(true)
+        
       };
 
 
@@ -311,7 +318,6 @@ function handleFileSelection(files) {
 }
 
 function triggerFileInput() {
-  // Trigger the hidden file input on button click
   const fileInput = document.getElementById('fileInput');
   fileInput.click();
 }
@@ -337,12 +343,8 @@ window.addEventListener('load', () => {
 
       hideUploadShowPreview(file)
       formData.set('image', file);
-      fileUploadValidation(true);
-      isCategoryProvided()
+      
     }
-  } else {
-    fileUploadValidation(false);
-    isCategoryProvided()
   }
 });
 
@@ -351,49 +353,60 @@ function fileUploadValidation(hasImage){
   document.getElementById("submitButton").disabled = hasImage !== true;
 }
 
-function isImageProvided(){
-  const imageItem = localStorage.getItem('imageURL')
-  return !!imageItem;
-}
-function isCategoryProvided(){
-  if(selectedCategoriesarr.length === 0){
-    submitBtn.disabled = true
-  }else{
-    submitBtn.disabled = false
-  }
-}
 
 
 // Post request
 function submitForm(e) {
   e.preventDefault();
 
-  // Append other form fields to formData
-  formData.append("title", document.getElementById("headerInput").value);
-  formData.append("description", document.getElementById("aboutInput").value);
-  formData.append("author", document.getElementById("authorInput").value);
-  formData.append("publish_date", document.getElementById("dateInput").value);
-  formData.append("categories", JSON.stringify(selectedCategoriesarr));
-  formData.append("email", document.getElementById("emailInput").value);
+  function isFormValid(){
+    var imageItem = localStorage.getItem('imageURL')
+    if(imageItem && selectedCategoriesarr.length > 0){
+      return true
+    }else{
+      return false
+    }
+  }
+  if(isFormValid()){
+    // Append other form fields to formData
+    formData.append("title", document.getElementById("headerInput").value);
+    formData.append("description", document.getElementById("aboutInput").value);
+    formData.append("author", document.getElementById("authorInput").value);
+    formData.append("publish_date", document.getElementById("dateInput").value);
+    formData.append("categories", JSON.stringify(selectedCategoriesarr));
+    formData.append("email", document.getElementById("emailInput").value);
+  
+    // Use the fetch API for the POST request
+    var settings = {
+      url: "https://api.blog.redberryinternship.ge/api/blogs",
+      method: "POST",
+      timeout: 0,
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer 68a4399dfe02608c084486976c178a211bab0ce0ff4ec2efcdbe8bca761f7a39",
+      },
+      processData: false,
+      mimeType: "multipart/form-data",
+      contentType: false,
+      data: formData,
+    };
+  
+    $.ajax(settings).done(function (response) {
+      if(response === undefined){
+        console.log('daiposta')
+        localStorage.clear();
+        localStorage.setItem('loggedInUser', 'user');
+        const modal = document.getElementById("blogModal");
+        modal.showModal()
+      }
+    });
+  }
+  if(!localStorage.getItem('imageURL')){
+    document.getElementById('dropZone').style.border ='2px dashed #EA1919';
+  }
 
-  // Use the fetch API for the POST request
-  var settings = {
-    url: "https://api.blog.redberryinternship.ge/api/blogs",
-    method: "POST",
-    timeout: 0,
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer 68a4399dfe02608c084486976c178a211bab0ce0ff4ec2efcdbe8bca761f7a39",
-    },
-    processData: false,
-    mimeType: "multipart/form-data",
-    contentType: false,
-    data: formData,
-  };
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-  });
+  if(selectedCategoriesarr.length === 0){
+    document.getElementById('categoriesContainerDiv').style.borderColor = '#EA1919';
+  }
 }
-
