@@ -41,12 +41,9 @@ header{
 
 .div-filters{
     display: flex;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+    justify-content: center;
 }
-
-
-
-
 
 #modal{
     border: none;
@@ -179,4 +176,76 @@ header{
 
 #addBlogbtn{
     display: none;
+}
+
+.div-blogs{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1300px;
+    margin: auto;
+    margin-top: 8px;
+}
+
+.blog-content-div{
+    margin: 0 12px 0 12px;
+    margin-top: 56px;
+}
+
+.blog-img{
+    width: 408px;
+    height: 328px;
+    object-fit: cover;
+    margin-bottom: 24px;
+}
+.blog-author{
+    font-size: 16px;   
+}
+
+.blog-publish_date{
+    font-family: 'Fira Go light';
+    font-size: 12px;
+    color: #85858D;
+    margin-top: 8px;
+}
+
+.blog-title{
+    margin-top: 16px;
+    font-size: 20px;
+}
+.blog-description{
+    font-family: 'Fira Go light';
+    margin-top: 16px;
+    color: #404049;
+    font-size: 16px;
+}
+.open-blog-div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 16px;
+}
+
+.open-blog{
+    cursor: pointer;
+    color: #5D37F3;
+    font-size: 14px;
+    
+}
+
+.blog-categories{
+    margin-top: 16px;
+    width: 408px;
+    display: flex;
+    flex-wrap: wrap
+}
+.categorie-btn-blog{
+    font-family: 'Fira Go',Helvetica;
+    border: none;
+    width: auto;
+    padding: 8px 16px;
+    margin-right: 20px;
+    color: #FFF;
+    border-radius: 30px;
+    white-space: nowrap;
+    display: inline-block;
 }
