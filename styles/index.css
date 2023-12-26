@@ -187,11 +187,13 @@ header{
 }
 
 .blog-content-div{
+    width: 408px;
     margin: 0 12px 0 12px;
     margin-top: 56px;
 }
 
 .blog-img{
+    border-radius: 12px;
     width: 408px;
     height: 328px;
     object-fit: cover;
@@ -248,4 +250,7 @@ header{
     border-radius: 30px;
     white-space: nowrap;
     display: inline-block;
+}
+.selected{
+    border: 2px solid black;
 }

@@ -33,4 +33,5 @@ body {
     white-space: nowrap;
     display: inline-block;
     cursor: pointer;
+    border: 2px solid rgba(0,0,0,0);
 }
