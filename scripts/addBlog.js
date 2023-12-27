@@ -164,10 +164,10 @@ const validations = {
   emailInput: [
     {
       condition: (value) =>
-        value.endsWith("@redberry.ge"),
+        value.endsWith("@redberry.ge") || value.length === 0,
       errorMsgId: "emailInputError",
       isInputValid:
-        JSON.parse(localStorage.getItem("emailInputError")) || false,
+        JSON.parse(localStorage.getItem("emailInputError")) || true,
     },
   ],
   dateInput: [
