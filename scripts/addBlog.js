@@ -272,7 +272,6 @@ function openFileUploader() {
 
 const hideUploadShowPreview = (imageFile) => {
   document.getElementById('imagePreviewWrapper').classList.add('shown')
-  document.getElementById('imgSuccessSpan').innerText = imageFile.name
   document.getElementById('dropZone').style.display = 'none'
 }
 
