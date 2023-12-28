@@ -210,7 +210,13 @@ $.ajax(settings).done(function (response) {
     });
   });
   if (relatedBlogs.length > 0) {
+    const today = new Date();
     relatedBlogs.forEach((blog) => {
+      const blogDate = new Date(blog.publish_date);
+      if (blogDate > today) {
+        console.log('ak aris')
+        return;
+      }
       let newDiv = $("<div>")
         .addClass("slider-div");
 
