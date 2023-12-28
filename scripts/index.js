@@ -184,7 +184,7 @@ const blogsSettings = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer 68a4399dfe02608c084486976c178a211bab0ce0ff4ec2efcdbe8bca761f7a39",
+      "Bearer 146644a0ab655270543c3ac7e23a7fdd660c1c1bba6e7a4b06613ed2af94cec0",
   },
 };
 
