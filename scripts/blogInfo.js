@@ -124,7 +124,7 @@ $.ajax(settings).done(function (response) {
   let image = $("<img>")
     .attr("src", response.image)
     .attr("alt", "blog image")
-    .addClass("blog-img");
+    .addClass("blog-img-main");
   let author = $("<p>").text(response.author).addClass("blog-author");
   let date = $("<p>").text(response.publish_date).addClass("blog-publish_date");
   let email;
@@ -181,6 +181,13 @@ backBtn.addEventListener("click", () => {
 });
 
 //Get all blogs
+
+
+function viewBlog(e){
+  let blogId = e.target.getAttribute('blog-id')
+  window.location.href = 'blogInfo.html?id=' + blogId;
+}
+
 var settings = {
   url: "https://api.blog.redberryinternship.ge/api/blogs",
   method: "GET",
@@ -203,12 +210,69 @@ $.ajax(settings).done(function (response) {
     });
   });
   if (relatedBlogs.length > 0) {
-    
+    relatedBlogs.forEach((blog) => {
+      let newDiv = $("<div>")
+        .addClass("slider-div");
+
+      let image = $("<img>")
+        .attr("src", blog.image)
+        .attr("alt", "blog image")
+        .addClass("rlt-blog-img");
+
+      let author = $("<p>").text(blog.author).addClass("rlt-blog-author");
+      let date = $("<p>").text(blog.publish_date).addClass("rlt-blog-publish_date");
+      let title = $("<p>").text(blog.title).addClass("rlt-blog-title");
+      let categoriesDiv = $("<div>").addClass("rlt-blog-categories");
+
+      blog.categories.forEach(function (categorie) {
+        let categorieElement = $("<button>")
+          .text(categorie.title)
+          .addClass("rlt-categorie-btn-blog")
+          .css({
+            background: categorie.background_color,
+            color: categorie.text_color,
+          });
+        categoriesDiv.append(categorieElement);
+      });
+
+      let description = $("<p>")
+        .text(blog.description)
+        .addClass("rlt-blog-description");
+      let openBlogDiv = $("<div>").addClass("rlt-open-blog-div");
+      let buttonView = $("<p>")
+        .text("სრულად ნახვა")
+        .attr("blog-id", blog.id)
+        .addClass("rlt-open-blog")
+        .on("click", viewBlog);
+      let svg = $(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5.93415 13.0052C5.64125 13.2981 5.64125 13.773 5.93415 14.0659C6.22704 14.3587 6.70191 14.3587 6.99481 14.0659L5.93415 13.0052ZM14.2855 6.46446C14.2855 6.05024 13.9498 5.71445 13.5355 5.71446L6.78555 5.71445C6.37133 5.71445 6.03555 6.05024 6.03555 6.46445C6.03555 6.87867 6.37133 7.21445 6.78555 7.21445H12.7855V13.2145C12.7855 13.6287 13.1213 13.9645 13.5355 13.9645C13.9498 13.9645 14.2855 13.6287 14.2855 13.2145L14.2855 6.46446ZM6.99481 14.0659L14.0659 6.99478L13.0052 5.93412L5.93415 13.0052L6.99481 14.0659Z" fill="#5D37F3"/></svg>'
+      );
+      openBlogDiv.append(buttonView, svg);
+      newDiv.append(
+        image,
+        author,
+        date,
+        title,
+        categoriesDiv,
+        description,
+        openBlogDiv
+      );
+      $(".slider-content").append(newDiv);
+      let paragraphs = document.querySelectorAll(".rlt-blog-description");
+      let maxLength = 115;
+  
+      paragraphs.forEach(function (paragraph) {
+        if (paragraph.textContent.length > maxLength) {
+          paragraph.textContent =
+            paragraph.textContent.substring(0, maxLength) + "...";
+        }
+      });
+    });
   } else {
     let sameBlogsError = $("<p>")
       .text("მსგავსი სტატიები არ მოიძებნა")
       .addClass("same-blogs-error");
     $(".slider").empty();
-    $(".slider").append(sameBlogsError)
+    $(".slider").append(sameBlogsError);
   }
 });
