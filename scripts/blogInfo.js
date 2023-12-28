@@ -97,13 +97,15 @@ $(document).ready(function () {
   });
 });
 
-document.getElementById("backBtn").addEventListener("click", function () {
+document.getElementById("backBtnMain").addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
 //Get blog data by id
 const urlParams = new URLSearchParams(window.location.search);
 const blogId = urlParams.get("id");
+
+let singleBlog;
 
 var settings = {
   url: "https://api.blog.redberryinternship.ge/api/blogs/" + blogId,
@@ -117,7 +119,8 @@ var settings = {
 };
 
 $.ajax(settings).done(function (response) {
-  console.log(response);
+  singleBlog = response;
+
   let image = $("<img>")
     .attr("src", response.image)
     .attr("alt", "blog image")
@@ -160,4 +163,52 @@ $.ajax(settings).done(function (response) {
     categoriesDiv,
     description
   );
+});
+
+// slider
+let sliderContent = document.querySelector(".slider-content");
+let backBtn = document.querySelector("#backBtn");
+let nextBtn = document.querySelector("#nextBtn");
+
+nextBtn.addEventListener("click", () => {
+  sliderContent.style.scrollBehavior = "smooth";
+  sliderContent.scrollLeft += 440;
+});
+
+backBtn.addEventListener("click", () => {
+  sliderContent.style.scrollBehavior = "smooth";
+  sliderContent.scrollLeft -= 440;
+});
+
+//Get all blogs
+var settings = {
+  url: "https://api.blog.redberryinternship.ge/api/blogs",
+  method: "GET",
+  timeout: 0,
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer 68a4399dfe02608c084486976c178a211bab0ce0ff4ec2efcdbe8bca761f7a39",
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  const relatedBlogs = response.data.filter(function (blog) {
+    return blog.categories.some(function (category) {
+      return (
+        singleBlog.categories.some(function (blogCategory) {
+          return blogCategory.id === category.id;
+        }) && singleBlog.id !== blog.id
+      );
+    });
+  });
+  if (relatedBlogs.length > 0) {
+    
+  } else {
+    let sameBlogsError = $("<p>")
+      .text("მსგავსი სტატიები არ მოიძებნა")
+      .addClass("same-blogs-error");
+    $(".slider").empty();
+    $(".slider").append(sameBlogsError)
+  }
 });

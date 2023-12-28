@@ -253,7 +253,7 @@ function filterByCategories(e) {
       return selectedCategories.includes(category.id);
     });
   });
+
   appendBlogs(filteredBlogs);
 
-  console.log(selectedCategories);
 }
