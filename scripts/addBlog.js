@@ -277,7 +277,6 @@ const hideUploadShowPreview = (imageFile) => {
 
 function showUploadHidePreview() {
   document.getElementById('imagePreviewWrapper').classList.remove('shown')
-  document.getElementById('imgSuccessSpan').innerText = " "
   document.getElementById('dropZone').style.display = 'flex'
   const imageItem = localStorage.getItem('imageURL')
   if (imageItem)
@@ -383,7 +382,7 @@ function submitForm(e) {
       headers: {
         accept: "application/json",
         Authorization:
-          "Bearer 146644a0ab655270543c3ac7e23a7fdd660c1c1bba6e7a4b06613ed2af94cec0",
+          "Bearer 7e61cf75f6d019d5a46ed03bc3533a96f305e7aa74d5ff016c66db8eb2d55835",
       },
       processData: false,
       mimeType: "multipart/form-data",

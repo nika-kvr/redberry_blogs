@@ -84,7 +84,9 @@ body {
   margin: 18px 0 0 460px;
   cursor: pointer;
 }
-
+#dateInput{
+  padding: 15px;
+}
 .img-input-text {
   margin: 24px 0 0 164px;
 }
